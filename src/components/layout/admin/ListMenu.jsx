@@ -1,0 +1,140 @@
+import React, { useEffect, useState } from "react";
+import List from "@mui/material/List";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Collapse from "@mui/material/Collapse";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import LineAxisIcon from "@mui/icons-material/LineAxis";
+import { Typography } from "@mui/material";
+import LocalMallIcon from "@mui/icons-material/LocalMall";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import InventoryIcon from "@mui/icons-material/Inventory";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import LoyaltyIcon from "@mui/icons-material/Loyalty";
+import { Link } from "react-router-dom";
+
+export default function ListMenu({ isCloseOpenMenu }) {
+  const [isMenuProduct, setIsMenuProduct] = useState(
+    localStorage.getItem("isShowProduct") === "true" ? true : false
+  );
+  useEffect(() => {
+    localStorage.setItem("isShowProduct", isMenuProduct);
+  }, [isMenuProduct]);
+  const handleClickOpenMenuProduct = () => {
+    localStorage.setItem("isShowProduct", !isMenuProduct);
+    setIsMenuProduct(!isMenuProduct);
+  };
+
+  const handleCloseOpenMenu = (isClose) => {
+    if (typeof isCloseOpenMenu == "function") {
+      isCloseOpenMenu(isClose);
+    }
+  };
+
+  return (
+    <List
+      sx={{
+        p: 0,
+        overflow: "auto",
+        maxHeight: "100vh",
+        height: "100vh",
+        minWidth: "260px",
+        width: "20vw",
+        borderRight: "1px solid #D3D3D3",
+      }}
+      component="nav"
+      aria-labelledby="nested-list-subheader"
+      subheader={
+        <Typography
+          textAlign={"center"}
+          variant="h6"
+          sx={{
+            fontFamily: "cursive",
+            fontWeight: 900,
+            p: 2,
+            fontSize: "25px",
+            color: "inherit",
+          }}>
+          LIAMSHOP
+        </Typography>
+      }>
+      <ListItemButton
+        component={Link}
+        to="/admin/dashboard"
+        onClick={() => handleCloseOpenMenu(false)}>
+        <ListItemIcon>
+          <LineAxisIcon sx={{ color: "black" }} />
+        </ListItemIcon>
+        <ListItemText primary="Thống kê" />
+      </ListItemButton>
+      <ListItemButton onClick={() => handleCloseOpenMenu(false)}>
+        <ListItemIcon>
+          <LocalMallIcon sx={{ color: "black" }} />
+        </ListItemIcon>
+        <ListItemText primary="Quản lý đơn hàng" />
+      </ListItemButton>
+      <ListItemButton onClick={() => handleCloseOpenMenu(false)}>
+        <ListItemIcon>
+          <AddShoppingCartIcon sx={{ color: "black" }} />
+        </ListItemIcon>
+        <ListItemText primary="Bán hàng tại quầy" />
+      </ListItemButton>
+      <ListItemButton onClick={handleClickOpenMenuProduct}>
+        <ListItemIcon>
+          <InventoryIcon sx={{ color: "black" }} />
+        </ListItemIcon>
+        <ListItemText primary="Quản lý sản phẩm" />
+        {isMenuProduct ? <ExpandLess /> : <ExpandMore />}
+      </ListItemButton>
+      <Collapse in={isMenuProduct} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItemButton
+            component={Link}
+            to="/admin/product"
+            sx={{ pl: 4 }}
+            onClick={() => handleCloseOpenMenu(false)}>
+            <ListItemText primary="&nbsp;	&bull; &nbsp; &nbsp; Sản phẩm" />
+          </ListItemButton>
+          <ListItemButton
+            component={Link}
+            to="/admin/category"
+            sx={{ pl: 4 }}
+            onClick={() => handleCloseOpenMenu(false)}>
+            <ListItemText primary="&nbsp;	&bull; &nbsp; &nbsp; Danh mục" />
+          </ListItemButton>
+          <ListItemButton
+            component={Link}
+            to="/admin/color"
+            sx={{ pl: 4 }}
+            onClick={() => handleCloseOpenMenu(false)}>
+            <ListItemText primary="&nbsp;	&bull; &nbsp; &nbsp; Màu sắc" />
+          </ListItemButton>
+          <ListItemButton
+            component={Link}
+            to="/admin/size"
+            sx={{ pl: 4 }}
+            onClick={() => handleCloseOpenMenu(false)}>
+            <ListItemText primary="&nbsp;	&bull; &nbsp; &nbsp; Size" />
+          </ListItemButton>
+        </List>
+      </Collapse>
+      <ListItemButton
+        component={Link}
+        to="/admin/voucher"
+        onClick={() => handleCloseOpenMenu(false)}>
+        <ListItemIcon>
+          <LoyaltyIcon sx={{ color: "black" }} />
+        </ListItemIcon>
+        <ListItemText primary="Khuyến mại" />
+      </ListItemButton>
+      <ListItemButton onClick={() => handleCloseOpenMenu(false)}>
+        <ListItemIcon>
+          <PeopleAltIcon sx={{ color: "black" }} />
+        </ListItemIcon>
+        <ListItemText primary="Tài khoản" />
+      </ListItemButton>
+    </List>
+  );
+}
