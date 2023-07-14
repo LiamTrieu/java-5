@@ -53,11 +53,11 @@ export default function Checkout() {
           <Grid item lg={7} sx={{ px: { lg: "40px" } }} width={"100%"}>
             <LabelTitle title="Thông tin thanh toán" />
             <InputForm id="input-name" label="Họ và tên của bạn" />
-            <Grid container spacing={3}>
+            <Grid container mt={0} spacing={3}>
               <InputFormGrid id="input-number" label="Số điện thoại của bạn" />
               <InputFormGrid id="input-email" label="Địa chỉ email của bạn" />
             </Grid>
-            <Grid container spacing={3}>
+            <Grid container mt={0} spacing={3}>
               <InputFormSelectGrid
                 id="input-tinh"
                 options={["Hưng Yên", "Hà Nội", "Thanh Hóa"]}
@@ -69,7 +69,7 @@ export default function Checkout() {
                 label="Quận/Huyện"
               />
             </Grid>
-            <Grid container spacing={3}>
+            <Grid container mt={0} spacing={3}>
               <InputFormSelectGrid
                 id="input-xa"
                 options={["Đặng Lễ", "Phúc Diễn", "Xã Minh Tâm"]}
@@ -77,7 +77,7 @@ export default function Checkout() {
               />
               <InputFormGrid id="dia-chi" label="Địa chỉ cụ thể" />
             </Grid>
-            <FormControl fullWidth sx={{ mt: "20px" }}>
+            <FormControl fullWidth sx={{ mt: 3 }}>
               <InputLabel htmlFor="ghi-chu">
                 Ghi chú đơn hàng (tuỳ chọn)
               </InputLabel>

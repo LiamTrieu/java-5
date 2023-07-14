@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import {
   Avatar,
@@ -75,8 +75,7 @@ export default function ListMenuHeader(props) {
           </Tooltip>
         </Toolbar>
         <Box
-          pt={1}
-          style={{ overflow: "auto", maxHeight: "88vh" }}
+          style={{ overflow: "auto", maxHeight: "90vh" }}
           sx={{ backgroundColor: "#F9F9F9" }}>
           {props.children}
         </Box>

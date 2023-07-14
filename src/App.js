@@ -13,6 +13,11 @@ import ProductAdmin from "./components/pages/admin/ProductAdmin";
 import AdminLogin from "./components/pages/admin/AdminLogin";
 import VoucherAdmin from "./components/pages/admin/VoucherAdmin";
 import CategoryAdmin from "./components/pages/admin/CategoryAdmin";
+import ColorAdmin from "./components/pages/admin/ColorAdmin";
+import StaffAdmin from "./components/pages/admin/StaffAdmin";
+import CustomerAdmin from "./components/pages/admin/CustomerAdmin";
+import OrderAdmin from "./components/pages/admin/OrderAdmin";
+import SellAdmin from "./components/pages/admin/SellAdmin";
 
 function App() {
   return (
@@ -30,9 +35,14 @@ function App() {
           </Route>
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
+          <Route path="/admin/order" element={<OrderAdmin />} />
+          <Route path="/admin/sell" element={<SellAdmin />} />
           <Route path="/admin/product" element={<ProductAdmin />} />
           <Route path="/admin/voucher" element={<VoucherAdmin />} />
           <Route path="/admin/category" element={<CategoryAdmin />} />
+          <Route path="/admin/color" element={<ColorAdmin />} />
+          <Route path="/admin/staff" element={<StaffAdmin />} />
+          <Route path="/admin/customer" element={<CustomerAdmin />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -18,8 +18,8 @@ import { ColorCustom } from "../../../styles/ColorCustom";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
-import FormCategory from "../../layout/admin/category/FormCategory";
-import TableCategory from "../../layout/admin/category/TableCategory";
+import FormColor from "../../layout/admin/color/FormColor";
+import TableColor from "../../layout/admin/color/TableColor";
 
 const style = {
   position: "absolute",
@@ -30,7 +30,7 @@ const style = {
   bgcolor: "background.paper",
 };
 
-export default function CategoryAdmin() {
+export default function ColorAdmin() {
   const [isFrom, setIsFrom] = useState(false);
 
   const showFrom = (isShow) => (event) => {
@@ -47,7 +47,7 @@ export default function CategoryAdmin() {
     <ListMenuHeader>
       <Container maxWidth="lg">
         <Typography variant="h6" fontWeight={"bold"} my={1}>
-          Danh mục sản phẩm
+          Màu sắc sản phẩm
         </Typography>
         <Paper variant="outlined" sx={{ mb: 2 }}>
           <Box m={2}>
@@ -75,7 +75,7 @@ export default function CategoryAdmin() {
                       color="success"
                       onClick={showFrom(true)}>
                       <AddIcon />
-                      Thêm danh mục
+                      Thêm màu sắc
                     </Button>
                   </Box>
                 </Grid2>
@@ -94,9 +94,9 @@ export default function CategoryAdmin() {
                         flexGrow: 1,
                       }}>
                       <Typography variant="h6" component="div">
-                        Thêm danh mục
+                        Thêm màu sắc
                       </Typography>
-                      Thêm danh mục của bạn và thông tin cần thiết từ đây
+                      Thêm màu sắc của bạn và thông tin cần thiết từ đây
                     </Box>
                     <IconButton
                       onClick={showFrom(false)}
@@ -108,7 +108,7 @@ export default function CategoryAdmin() {
                       <CloseIcon />
                     </IconButton>
                   </Toolbar>
-                  <FormCategory />
+                  <FormColor color={{ name: "", ma: "#000000" }} />
                   <div
                     style={{
                       height: "15vh",
@@ -132,7 +132,7 @@ export default function CategoryAdmin() {
                           size="large"
                           variant="contained"
                           color="success">
-                          Thêm danh mục
+                          Thêm màu sắc
                         </Button>
                       </Grid2>
                     </Grid2>
@@ -150,15 +150,15 @@ export default function CategoryAdmin() {
                   sx={{ background: "rgba(0,0,0,.03)" }}
                   fullWidth
                   size="small"
-                  id="search-category-input"
-                  label="Tên danh mục"
+                  id="search-color-input"
+                  label="Tên màu sắc"
                   variant="outlined"
                 />
               </Grid2>
             </Grid2>
           </Box>
         </Paper>
-        <TableCategory />
+        <TableColor />
       </Container>
     </ListMenuHeader>
   );

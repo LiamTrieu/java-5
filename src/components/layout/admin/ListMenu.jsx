@@ -19,12 +19,20 @@ export default function ListMenu({ isCloseOpenMenu }) {
   const [isMenuProduct, setIsMenuProduct] = useState(
     localStorage.getItem("isShowProduct") === "true" ? true : false
   );
+  const [isMenuAccount, setIsMenuAccount] = useState(
+    localStorage.getItem("isShowAccountMenu") === "true" ? true : false
+  );
   useEffect(() => {
     localStorage.setItem("isShowProduct", isMenuProduct);
-  }, [isMenuProduct]);
+    localStorage.setItem("isShowAccountMenu", isMenuAccount);
+  }, [isMenuProduct, isMenuAccount]);
   const handleClickOpenMenuProduct = () => {
     localStorage.setItem("isShowProduct", !isMenuProduct);
     setIsMenuProduct(!isMenuProduct);
+  };
+  const handleClickOpenMenuAccount = () => {
+    localStorage.setItem("isShowAccountMenu", !isMenuAccount);
+    setIsMenuAccount(!isMenuAccount);
   };
 
   const handleCloseOpenMenu = (isClose) => {
@@ -69,13 +77,19 @@ export default function ListMenu({ isCloseOpenMenu }) {
         </ListItemIcon>
         <ListItemText primary="Thống kê" />
       </ListItemButton>
-      <ListItemButton onClick={() => handleCloseOpenMenu(false)}>
+      <ListItemButton
+        component={Link}
+        to="/admin/order"
+        onClick={() => handleCloseOpenMenu(false)}>
         <ListItemIcon>
           <LocalMallIcon sx={{ color: "black" }} />
         </ListItemIcon>
         <ListItemText primary="Quản lý đơn hàng" />
       </ListItemButton>
-      <ListItemButton onClick={() => handleCloseOpenMenu(false)}>
+      <ListItemButton
+        component={Link}
+        to="/admin/sell"
+        onClick={() => handleCloseOpenMenu(false)}>
         <ListItemIcon>
           <AddShoppingCartIcon sx={{ color: "black" }} />
         </ListItemIcon>
@@ -111,13 +125,6 @@ export default function ListMenu({ isCloseOpenMenu }) {
             onClick={() => handleCloseOpenMenu(false)}>
             <ListItemText primary="&nbsp;	&bull; &nbsp; &nbsp; Màu sắc" />
           </ListItemButton>
-          <ListItemButton
-            component={Link}
-            to="/admin/size"
-            sx={{ pl: 4 }}
-            onClick={() => handleCloseOpenMenu(false)}>
-            <ListItemText primary="&nbsp;	&bull; &nbsp; &nbsp; Size" />
-          </ListItemButton>
         </List>
       </Collapse>
       <ListItemButton
@@ -129,12 +136,31 @@ export default function ListMenu({ isCloseOpenMenu }) {
         </ListItemIcon>
         <ListItemText primary="Khuyến mại" />
       </ListItemButton>
-      <ListItemButton onClick={() => handleCloseOpenMenu(false)}>
+      <ListItemButton onClick={handleClickOpenMenuAccount}>
         <ListItemIcon>
           <PeopleAltIcon sx={{ color: "black" }} />
         </ListItemIcon>
         <ListItemText primary="Tài khoản" />
+        {isMenuAccount ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
+      <Collapse in={isMenuAccount} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItemButton
+            component={Link}
+            to="/admin/staff"
+            sx={{ pl: 4 }}
+            onClick={() => handleCloseOpenMenu(false)}>
+            <ListItemText primary="&nbsp;	&bull; &nbsp; &nbsp; Nhân viên" />
+          </ListItemButton>
+          <ListItemButton
+            component={Link}
+            to="/admin/customer"
+            sx={{ pl: 4 }}
+            onClick={() => handleCloseOpenMenu(false)}>
+            <ListItemText primary="&nbsp;	&bull; &nbsp; &nbsp; Khách hàng" />
+          </ListItemButton>
+        </List>
+      </Collapse>
     </List>
   );
 }

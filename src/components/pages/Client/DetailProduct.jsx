@@ -1,13 +1,12 @@
-import styled from "@emotion/styled";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Box,
   Button,
-  ButtonGroup,
   Container,
-  OutlinedInput,
+  IconButton,
+  TextField,
   ThemeProvider,
   Typography,
 } from "@mui/material";
@@ -17,14 +16,8 @@ import { ColorCustom } from "../../../styles/ColorCustom";
 import CartProduct from "../../layout/client/CartProduct";
 import LabelTitle from "../../layout/client/LabelTitle";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
-const CustomOutlinedInput = styled(OutlinedInput)`
-  .MuiOutlinedInput-input {
-    padding: 0;
-    padding-left: 0;
-    text-align: center;
-  }
-`;
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 const products = [
   {
@@ -36,7 +29,7 @@ const products = [
   {
     id: 2,
     title: "Giay so 1",
-    image: "http://surl.li/hqdbv",
+    image: "https://shorturl.at/frAES",
   },
   {
     id: 3,
@@ -46,27 +39,27 @@ const products = [
   {
     id: 4,
     title: "Giay so 1",
-    image: "http://surl.li/hqdas",
+    image: "https://shorturl.at/frAES",
   },
   {
     id: 5,
     title: "Giay so 1",
-    image: "http://surl.li/hqdaw",
+    image: "https://shorturl.at/frAES",
   },
   {
     id: 6,
     title: "Giay so 1",
-    image: "http://surl.li/hqdba",
+    image: "https://shorturl.at/frAES",
   },
   {
     id: 7,
     title: "Giay so 1",
-    image: "http://surl.li/hqdbg",
+    image: "https://shorturl.at/frAES",
   },
   {
     id: 8,
     title: "Giay so 1",
-    image: "http://surl.li/hqdbn",
+    image: "https://shorturl.at/frAES",
   },
 ];
 
@@ -78,7 +71,7 @@ export default function DetailProduct() {
         <Grid2 md={6} textAlign={"center"} width={"100%"}>
           <Box
             component={"img"}
-            src="http://surl.li/hqdbn"
+            src="https://shorturl.at/frAES"
             width={"100%"}
             alt="error"></Box>
         </Grid2>
@@ -176,6 +169,7 @@ export default function DetailProduct() {
             </Box>
             <Box py={2}>
               <Typography
+                sx={{ float: "left", mt: "3px" }}
                 color={"red"}
                 mr={2}
                 fontWeight={"bold"}
@@ -183,32 +177,47 @@ export default function DetailProduct() {
                 gutterBottom>
                 Số lượng: 100
               </Typography>
-              <ButtonGroup size="small" aria-label="small button group">
-                <Button
+              <Box
+                width={"65px"}
+                display="flex"
+                alignItems="center"
+                sx={{
+                  border: "1px solid gray",
+                  borderRadius: "20px",
+                }}
+                p={"3px"}>
+                <IconButton
                   onClick={(e) => {
                     setSoluong(soLuong - 1);
-                  }}>
-                  -
-                </Button>
-                <CustomOutlinedInput
+                  }}
+                  sx={{ p: 0 }}
+                  size="small">
+                  <RemoveIcon fontSize="1px" />
+                </IconButton>
+                <TextField
                   onChange={(e) => {
                     setSoluong(e.target.value);
                   }}
-                  sx={{
-                    height: "30px",
-                    width: "50px",
-                    fontSize: "15px",
-                    borderRadius: "0px",
-                  }}
                   value={soLuong}
+                  inputProps={{ min: 1 }}
+                  size="small"
+                  sx={{
+                    width: "30px ",
+                    "& input": { p: 0, textAlign: "center" },
+                    "& fieldset": {
+                      border: "none",
+                    },
+                  }}
                 />
-                <Button
+                <IconButton
                   onClick={() => {
                     setSoluong(soLuong + 1);
-                  }}>
-                  +
-                </Button>
-              </ButtonGroup>
+                  }}
+                  size="small"
+                  sx={{ p: 0 }}>
+                  <AddIcon fontSize="1px" />
+                </IconButton>
+              </Box>
             </Box>
           </Box>
           <ThemeProvider theme={ColorCustom}>

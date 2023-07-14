@@ -67,7 +67,9 @@ export default function FormProduct() {
                 document.getElementById("input-anh").click();
               }}>
               <Box py={3}>
-                {srcImg && <img id="myImage" src={srcImg} height={"50vh"} />}
+                {srcImg && (
+                  <img alt="error" id="myImage" src={srcImg} height={"50vh"} />
+                )}
                 {!srcImg && (
                   <>
                     <CloudUploadIcon color="success" />

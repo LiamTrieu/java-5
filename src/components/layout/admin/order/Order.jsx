@@ -11,14 +11,23 @@ import {
   Button,
   IconButton,
   Modal,
+  TextField,
   Toolbar,
   Typography,
 } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
+import PreviewIcon from "@mui/icons-material/Preview";
 import CloseIcon from "@mui/icons-material/Close";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { useState } from "react";
-import FormCategory from "./FormCategory";
+import { ThemeProvider } from "@emotion/react";
+import { ColorCustom } from "../../../../styles/ColorCustom";
+
+import FileUploadIcon from "@mui/icons-material/FileUpload";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DoneIcon from "@mui/icons-material/Done";
+import DataTable from "../../../../Temp/DataTable";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import FactCheckIcon from "@mui/icons-material/FactCheck";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -41,9 +50,13 @@ const style = {
   bgcolor: "background.paper",
 };
 
-export default function TableCategory() {
+export default function Order({ status }) {
   const [isFrom, setIsFrom] = useState(false);
-
+  const arrStatusService = [
+    { chageButton: "Xác nhận", icon: <DoneIcon />, color: "success" },
+    { chageButton: "Giao hàng", icon: <LocalShippingIcon />, color: "warning" },
+    { chageButton: "Hoàn thành", icon: <FactCheckIcon />, color: "primary" },
+  ];
   const showFrom = (isShow) => (event) => {
     if (
       event.type === "keydown" &&
@@ -56,6 +69,59 @@ export default function TableCategory() {
 
   return (
     <>
+      <Paper variant="outlined" sx={{ mb: 2 }}>
+        <Box m={2}>
+          <ThemeProvider theme={ColorCustom}>
+            <Grid2 container spacing={2}>
+              <Grid2 lg={6} xs={12}>
+                <Box>
+                  <Button
+                    sx={{ textTransform: "none" }}
+                    variant="outlined"
+                    color="neutral">
+                    <FileUploadIcon />
+                    Export Excel
+                  </Button>
+                </Box>
+              </Grid2>
+              <Grid2 lg={6} xs={12}>
+                <Box sx={{ float: { lg: "right" } }}>
+                  {status < 4 && (
+                    <Button variant="contained" color="error" sx={{ mr: 2 }}>
+                      <DeleteIcon />
+                      Hủy
+                    </Button>
+                  )}
+                  {status < 3 && (
+                    <Button
+                      variant="contained"
+                      color={arrStatusService[status].color}>
+                      {arrStatusService[status].icon}
+                      {arrStatusService[status].chageButton}
+                    </Button>
+                  )}
+                </Box>
+              </Grid2>
+            </Grid2>
+          </ThemeProvider>
+        </Box>
+      </Paper>
+      <Paper variant="outlined" sx={{ mb: 2 }}>
+        <Box p={2}>
+          <Grid2 container spacing={2}>
+            <Grid2 lg={3} md={4} xs={12}>
+              <TextField
+                sx={{ background: "rgba(0,0,0,.03)" }}
+                fullWidth
+                size="small"
+                id="search-wait-order-input"
+                label="Mã đơn hàng"
+                variant="outlined"
+              />
+            </Grid2>
+          </Grid2>
+        </Box>
+      </Paper>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
@@ -65,7 +131,7 @@ export default function TableCategory() {
               <TableCell align="right">Fat&nbsp;(g)</TableCell>
               <TableCell align="right">Carbs&nbsp;(g)</TableCell>
               <TableCell align="right">Protein&nbsp;(g)</TableCell>
-              <TableCell align="right">Action</TableCell>
+              <TableCell align="center">Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -80,10 +146,20 @@ export default function TableCategory() {
                 <TableCell align="right">{row.fat}</TableCell>
                 <TableCell align="right">{row.carbs}</TableCell>
                 <TableCell align="right">{row.protein}</TableCell>
-                <TableCell align="right">
-                  <IconButton onClick={showFrom(true)} color="warning">
-                    <EditIcon />
+                <TableCell align="center">
+                  {status < 3 && (
+                    <IconButton color={arrStatusService[status].color}>
+                      {arrStatusService[status].icon}
+                    </IconButton>
+                  )}
+                  <IconButton onClick={showFrom(true)} color="secondary">
+                    <PreviewIcon />
                   </IconButton>
+                  {status < 4 && (
+                    <IconButton color="error">
+                      <DeleteIcon />
+                    </IconButton>
+                  )}
                 </TableCell>
               </TableRow>
             ))}
@@ -95,7 +171,6 @@ export default function TableCategory() {
         <Box sx={style}>
           <Toolbar
             style={{
-              height: "15vh",
               backgroundColor: "rgba(249,250,251)",
               boxShadow: "0 1px 2px 0 rgba(0,0,0,.1)",
             }}>
@@ -105,9 +180,8 @@ export default function TableCategory() {
                 flexGrow: 1,
               }}>
               <Typography variant="h6" component="div">
-                Cập nhập danh mục
+                Sản phẩm của đơn hàng
               </Typography>
-              Cập nhập danh mục của bạn và thông tin cần thiết từ đây
             </Box>
             <IconButton
               onClick={showFrom(false)}
@@ -119,10 +193,9 @@ export default function TableCategory() {
               <CloseIcon />
             </IconButton>
           </Toolbar>
-          <FormCategory category={"Category nè!!!"} />
+          <DataTable />
           <div
             style={{
-              height: "15vh",
               backgroundColor: "rgba(249,250,251)",
               boxShadow: "1px 0px 2px 0 rgba(0,0,0,.1)",
             }}>
@@ -132,19 +205,26 @@ export default function TableCategory() {
                   onClick={showFrom(false)}
                   style={{ backgroundColor: "rgba(229,231,235,1)" }}
                   fullWidth
-                  size="large"
                   color="error">
-                  Hủy
+                  Ẩn
                 </Button>
               </Grid2>
               <Grid2 xs={6}>
-                <Button
-                  fullWidth
-                  size="large"
-                  variant="contained"
-                  color="success">
-                  Cập nhập danh mục
-                </Button>
+                {status < 3 ? (
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color={arrStatusService[status].color}>
+                    {arrStatusService[status].chageButton}
+                  </Button>
+                ) : status === 3 ? (
+                  <Button variant="contained" color="error" fullWidth>
+                    <DeleteIcon />
+                    Hủy
+                  </Button>
+                ) : (
+                  ""
+                )}
               </Grid2>
             </Grid2>
           </div>

@@ -16,12 +16,13 @@ const products = [
   {
     id: 1,
     title: "Giay so 1",
-    image: "https://shorturl.at/ryHU3",
+    image:
+      "https://images-ext-1.discordapp.net/external/d9tmOqHZxmsQv_ed6p_sl5cEf8vzGe3u7AizusjbLq4/https/a.ipricegroup.com/trends-article/top-3-mau-giay-converse-duoc-cac-ngoi-sao-quoc-te-ua-chuong-medium.jpg?width=947&height=498",
   },
   {
     id: 2,
     title: "Giay so 1",
-    image: "http://surl.li/hqdbv",
+    image: "https://shorturl.at/frAES",
   },
   {
     id: 3,
@@ -31,27 +32,27 @@ const products = [
   {
     id: 4,
     title: "Giay so 1",
-    image: "http://surl.li/hqdas",
+    image: "https://shorturl.at/frAES",
   },
   {
     id: 5,
     title: "Giay so 1",
-    image: "http://surl.li/hqdaw",
+    image: "https://shorturl.at/frAES",
   },
   {
     id: 6,
     title: "Giay so 1",
-    image: "http://surl.li/hqdba",
+    image: "https://shorturl.at/frAES",
   },
   {
     id: 7,
     title: "Giay so 1",
-    image: "http://surl.li/hqdbg",
+    image: "https://shorturl.at/frAES",
   },
   {
     id: 8,
     title: "Giay so 1",
-    image: "http://surl.li/hqdbn",
+    image: "https://shorturl.at/frAES",
   },
 ];
 

@@ -10,7 +10,7 @@ import {
   Box,
   Button,
   IconButton,
-  SwipeableDrawer,
+  Modal,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -18,7 +18,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { useState } from "react";
-import FormVoucher from "./FormVoucher";
+import FormCategory from "./FormColor";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -32,7 +32,16 @@ const rows = [
   createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
 
-export default function TableVoucher() {
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: { md: "50%", xs: "100%" },
+  bgcolor: "background.paper",
+};
+
+export default function TableColor() {
   const [isFrom, setIsFrom] = useState(false);
 
   const showFrom = (isShow) => (event) => {
@@ -82,73 +91,65 @@ export default function TableVoucher() {
         </Table>
       </TableContainer>
 
-      <SwipeableDrawer
-        anchor="right"
-        onOpen={showFrom(true)}
-        open={isFrom}
-        onClose={showFrom(false)}>
-        <Toolbar
-          style={{
-            height: "15vh",
-            backgroundColor: "rgba(249,250,251)",
-            boxShadow: "0 1px 2px 0 rgba(0,0,0,.1)",
-          }}>
-          <Box
-            sx={{
-              color: "black",
-              flexGrow: 1,
-            }}>
-            <Typography variant="h6" component="div">
-              Cập nhập mã giảm giá
-            </Typography>
-            Cập nhập mã giảm giá của bạn và thông tin cần thiết từ đây
-          </Box>
-          <IconButton
-            onClick={showFrom(false)}
-            aria-label="close"
-            color="error"
+      <Modal open={isFrom} onClose={showFrom(false)}>
+        <Box sx={style}>
+          <Toolbar
             style={{
-              boxShadow: "1px 2px 3px 1px rgba(0,0,0,.05)",
+              height: "15vh",
+              backgroundColor: "rgba(249,250,251)",
+              boxShadow: "0 1px 2px 0 rgba(0,0,0,.1)",
             }}>
-            <CloseIcon />
-          </IconButton>
-        </Toolbar>
-        <Box
-          style={{
-            overflow: "auto",
-            minHeight: "70vh",
-          }}>
-          <FormVoucher />
+            <Box
+              sx={{
+                color: "black",
+                flexGrow: 1,
+              }}>
+              <Typography variant="h6" component="div">
+                Cập nhập màu sắc
+              </Typography>
+              Cập nhập màu sắc của bạn và thông tin cần thiết từ đây
+            </Box>
+            <IconButton
+              onClick={showFrom(false)}
+              aria-label="close"
+              color="error"
+              style={{
+                boxShadow: "1px 2px 3px 1px rgba(0,0,0,.05)",
+              }}>
+              <CloseIcon />
+            </IconButton>
+          </Toolbar>
+          <FormCategory color={{ name: "Đen", ma: "#000000" }} />
+          <div
+            style={{
+              height: "15vh",
+              backgroundColor: "rgba(249,250,251)",
+              boxShadow: "1px 0px 2px 0 rgba(0,0,0,.1)",
+            }}>
+            <Grid2 container spacing={3} maxWidth={"100%"} m={0} pt={2}>
+              <Grid2 xs={6}>
+                <Button
+                  onClick={showFrom(false)}
+                  style={{ backgroundColor: "rgba(229,231,235,1)" }}
+                  fullWidth
+                  size="large"
+                  color="error">
+                  Hủy
+                </Button>
+              </Grid2>
+              <Grid2 xs={6}>
+                <Button
+                  fullWidth
+                  size="large"
+                  variant="contained"
+                  color="success">
+                  Cập nhập màu sắc
+                </Button>
+              </Grid2>
+            </Grid2>
+          </div>
         </Box>
-        <div
-          style={{
-            height: "15vh",
-            backgroundColor: "rgba(249,250,251)",
-            boxShadow: "1px 0px 2px 0 rgba(0,0,0,.1)",
-          }}>
-          <Grid2 container spacing={3} maxWidth={"100%"} m={0} pt={2}>
-            <Grid2 xs={6}>
-              <Button
-                onClick={showFrom(false)}
-                style={{ backgroundColor: "rgba(229,231,235,1)" }}
-                fullWidth
-                size="large"
-                color="error">
-                Hủy
-              </Button>
-            </Grid2>
-            <Grid2 xs={6}>
-              <Button
-                fullWidth
-                size="large"
-                variant="contained"
-                color="success">
-                Cập nhập mã giảm giá
-              </Button>
-            </Grid2>
-          </Grid2>
-        </div>
-      </SwipeableDrawer>
+      </Modal>
     </>
   );
 }

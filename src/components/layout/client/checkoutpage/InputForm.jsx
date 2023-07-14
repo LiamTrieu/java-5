@@ -10,7 +10,7 @@ import React from "react";
 
 export default function InputForm({ id, label }) {
   return (
-    <FormControl fullWidth sx={{ mt: "20px" }} size="small">
+    <FormControl fullWidth sx={{ mt: "10px" }} size="small">
       <InputLabel htmlFor={id}>{label}</InputLabel>
       <OutlinedInput id={id} label={label} />
     </FormControl>
@@ -30,7 +30,7 @@ export function InputFormSelectGrid({ id, options, label }) {
     <Grid item xs={6}>
       <Autocomplete
         fullWidth
-        sx={{ mt: "20px" }}
+        sx={{ mt: "10px" }}
         size="small"
         disablePortal
         id="select-tinh"

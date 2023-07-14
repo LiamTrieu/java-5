@@ -15,7 +15,7 @@ const products = [
   {
     id: 2,
     title: "Giay so 1",
-    image: "http://surl.li/hqdbv",
+    image: "https://shorturl.at/frAES",
   },
   {
     id: 3,
@@ -25,27 +25,27 @@ const products = [
   {
     id: 4,
     title: "Giay so 1",
-    image: "http://surl.li/hqdas",
+    image: "https://shorturl.at/frAES",
   },
   {
     id: 5,
     title: "Giay so 1",
-    image: "http://surl.li/hqdaw",
+    image: "https://shorturl.at/frAES",
   },
   {
     id: 6,
     title: "Giay so 1",
-    image: "http://surl.li/hqdba",
+    image: "https://shorturl.at/frAES",
   },
   {
     id: 7,
     title: "Giay so 1",
-    image: "http://surl.li/hqdbg",
+    image: "https://shorturl.at/frAES",
   },
   {
     id: 8,
     title: "Giay so 1",
-    image: "http://surl.li/hqdbn",
+    image: "https://shorturl.at/frAES",
   },
 ];
 

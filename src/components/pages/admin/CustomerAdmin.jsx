@@ -4,11 +4,8 @@ import {
   Box,
   Button,
   Container,
-  FormControl,
   IconButton,
-  InputLabel,
   Paper,
-  Select,
   SwipeableDrawer,
   TextField,
   ThemeProvider,
@@ -21,13 +18,10 @@ import { ColorCustom } from "../../../styles/ColorCustom";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
-import TableVoucher from "../../layout/admin/voucher/TableVoucher";
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import dayjs from "dayjs";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import FormVoucher from "../../layout/admin/voucher/FormVoucher";
+import FormCustomer from "../../layout/admin/customer/FormCustomer";
+import TableCustomer from "../../layout/admin/customer/TableCustomer";
 
-export default function DiscountAdmin() {
+export default function CustomerAdmin() {
   const [isFrom, setIsFrom] = useState(false);
 
   const showFrom = (isShow) => (event) => {
@@ -44,7 +38,7 @@ export default function DiscountAdmin() {
     <ListMenuHeader>
       <Container maxWidth="lg">
         <Typography variant="h6" fontWeight={"bold"} my={1}>
-          Mã giảm giá
+          Khách hàng
         </Typography>
         <Paper variant="outlined" sx={{ mb: 2 }}>
           <Box m={2}>
@@ -72,7 +66,7 @@ export default function DiscountAdmin() {
                       color="success"
                       onClick={showFrom(true)}>
                       <AddIcon />
-                      Thêm mã giảm giá
+                      Thêm khách hàng
                     </Button>
                   </Box>
                 </Grid2>
@@ -94,9 +88,9 @@ export default function DiscountAdmin() {
                       flexGrow: 1,
                     }}>
                     <Typography variant="h6" component="div">
-                      Thêm mã giảm giá
+                      Thêm khách hàng
                     </Typography>
-                    Thêm mã giảm giá của bạn và thông tin cần thiết từ đây
+                    Thêm khách hàng của bạn và thông tin cần thiết từ đây
                   </Box>
                   <IconButton
                     onClick={showFrom(false)}
@@ -108,7 +102,7 @@ export default function DiscountAdmin() {
                     <CloseIcon />
                   </IconButton>
                 </Toolbar>
-                <FormVoucher />
+                <FormCustomer />
                 <div
                   style={{
                     height: "15vh",
@@ -132,7 +126,7 @@ export default function DiscountAdmin() {
                         size="large"
                         variant="contained"
                         color="success">
-                        Thêm mã giảm giá
+                        Thêm khách hàng
                       </Button>
                     </Grid2>
                   </Grid2>
@@ -143,37 +137,20 @@ export default function DiscountAdmin() {
         </Paper>
         <Paper variant="outlined" sx={{ mb: 2 }}>
           <Box p={2}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Grid2 container spacing={2}>
-                <Grid2 lg={3} md={4} xs={12}>
-                  <TextField
-                    sx={{ background: "rgba(0,0,0,.03)" }}
-                    fullWidth
-                    id="search-voucher-input"
-                    label="Mã giảm giá"
-                    variant="outlined"
-                  />
-                </Grid2>
-                <Grid2 lg={3} md={4} xs={5}>
-                  <DatePicker
-                    format="DD-MM-YYYY"
-                    label="Từ ngày"
-                    defaultValue={dayjs(new Date())}
-                  />
-                </Grid2>
-                <Grid2 lg={3} md={4} xs={5}>
-                  <DatePicker
-                    sx={{ mx: 2 }}
-                    format="DD-MM-YYYY"
-                    label="Đến ngày"
-                    defaultValue={dayjs(new Date())}
-                  />
-                </Grid2>
+            <Grid2 container spacing={2}>
+              <Grid2 lg={3} md={4} xs={12}>
+                <TextField
+                  sx={{ background: "rgba(0,0,0,.03)" }}
+                  fullWidth
+                  id="search-voucher-input"
+                  label="Tên khách hàng"
+                  variant="outlined"
+                />
               </Grid2>
-            </LocalizationProvider>
+            </Grid2>
           </Box>
         </Paper>
-        <TableVoucher />
+        <TableCustomer />
       </Container>
     </ListMenuHeader>
   );

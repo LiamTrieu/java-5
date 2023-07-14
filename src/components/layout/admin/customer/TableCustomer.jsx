@@ -18,7 +18,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { useState } from "react";
-import FormVoucher from "./FormVoucher";
+import FormStaff from "./FormCustomer";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -32,7 +32,7 @@ const rows = [
   createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
 
-export default function TableVoucher() {
+export default function TableCustomer() {
   const [isFrom, setIsFrom] = useState(false);
 
   const showFrom = (isShow) => (event) => {
@@ -99,9 +99,9 @@ export default function TableVoucher() {
               flexGrow: 1,
             }}>
             <Typography variant="h6" component="div">
-              Cập nhập mã giảm giá
+              Cập nhập khách hàng
             </Typography>
-            Cập nhập mã giảm giá của bạn và thông tin cần thiết từ đây
+            Cập nhập khách hàng của bạn và thông tin cần thiết từ đây
           </Box>
           <IconButton
             onClick={showFrom(false)}
@@ -118,7 +118,7 @@ export default function TableVoucher() {
             overflow: "auto",
             minHeight: "70vh",
           }}>
-          <FormVoucher />
+          <FormStaff />
         </Box>
         <div
           style={{
@@ -143,7 +143,7 @@ export default function TableVoucher() {
                 size="large"
                 variant="contained"
                 color="success">
-                Cập nhập mã giảm giá
+                Cập nhập khách hàng
               </Button>
             </Grid2>
           </Grid2>

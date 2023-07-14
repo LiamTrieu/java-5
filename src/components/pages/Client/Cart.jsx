@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
-  ButtonGroup,
   Checkbox,
   Container,
-  OutlinedInput,
+  IconButton,
   TableFooter,
+  TextField,
   Typography,
 } from "@mui/material";
 import Table from "@mui/material/Table";
@@ -16,7 +16,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import styled from "@emotion/styled";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import PaidRoundedIcon from "@mui/icons-material/PaidRounded";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -29,15 +28,8 @@ import {
   TableCellCustom,
 } from "../../layout/client/cartpage/OrderCart";
 import { BoderDotted, NoBoder } from "../../../styles/TableStyle";
-
-const CustomOutlinedInput = styled(OutlinedInput)`
-  .MuiOutlinedInput-input {
-    padding: 0;
-    padding-left: 0;
-    text-align: center;
-  }
-`;
-
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 const arrData = [
   {
     id: 2,
@@ -45,7 +37,7 @@ const arrData = [
     size: 40,
     gia: "100.000",
     soLuong: 1,
-    image: "http://surl.li/hqdbn",
+    image: "https://shorturl.at/frAES",
     checked: false,
   },
   {
@@ -54,7 +46,7 @@ const arrData = [
     size: 43,
     gia: "500.000",
     soLuong: 3,
-    image: "http://surl.li/hqdbn",
+    image: "https://shorturl.at/frAES",
     checked: false,
   },
 ];
@@ -174,33 +166,40 @@ export default function Cart() {
             </span>
           </TableCell>
           <TableCell sx={{ px: 0 }}>
-            <ButtonGroup
-              size="small"
-              aria-label="small button group"
-              sx={{ display: { md: "flex", xs: "none" } }}>
-              <Button onClick={() => onChangeSL(cart.id, -1)}>-</Button>
-              <CustomOutlinedInput
+            <Box
+              width={"65px"}
+              display="flex"
+              alignItems="center"
+              sx={{
+                border: "1px solid gray",
+                borderRadius: "20px",
+              }}
+              p={"3px"}>
+              <IconButton
+                onClick={() => onChangeSL(cart.id, -1)}
+                sx={{ p: 0 }}
+                size="small">
+                <RemoveIcon fontSize="1px" />
+              </IconButton>
+              <TextField
                 onChange={(e) => onInputChangeSL(cart.id, e)}
-                sx={{
-                  borderRadius: "0px",
-                  height: "30px",
-                  width: "50px",
-                  fontSize: "15px",
-                }}
                 value={cart.soLuong}
-              />
-              <Button onClick={() => onChangeSL(cart.id, 1)}>+</Button>
-            </ButtonGroup>
-            <Box display={{ md: "none", xs: "block" }}>
-              <CustomOutlinedInput
-                onChange={(e) => onInputChangeSL(cart.id, e)}
+                inputProps={{ min: 1 }}
+                size="small"
                 sx={{
-                  height: "30px",
-                  width: "50px",
-                  fontSize: "15px",
+                  width: "30px ",
+                  "& input": { p: 0, textAlign: "center" },
+                  "& fieldset": {
+                    border: "none",
+                  },
                 }}
-                value={cart.soLuong}
               />
+              <IconButton
+                onClick={() => onChangeSL(cart.id, 1)}
+                size="small"
+                sx={{ p: 0 }}>
+                <AddIcon fontSize="1px" />
+              </IconButton>
             </Box>
           </TableCell>
           <TableCell
@@ -279,7 +278,11 @@ export default function Cart() {
               <TableBody>{RowDataCustom({ cartDatas: product })}</TableBody>
             </Table>
           </TableContainer>
-          <Button variant="outlined" color="success">
+          <Button
+            component={Link}
+            to="/products"
+            variant="outlined"
+            color="success">
             <ArrowBackIcon />
             <b>Tiếp tục mua hàng</b>
           </Button>
